@@ -70,13 +70,13 @@ export class NoteViewPage {
     let inputTitle, inputText;
     inputTitle = this.getTitleInputBox().getAttribute('value');
     inputText = this.getTextInputBox().getAttribute('value');
-    return Promise.all([inputTitle, inputText]).then( (values) => {
+    return Promise.all([inputTitle, inputText]).then((values) => {
       return values;
     });
   }
   // get note data
   getMockNote(): any {
-    const note: any = { title: 'Read Angular 5 blog', text : 'Shall do at 6 pm'};
+    const note: any = { title: 'Read Angular 5 blog', text: 'Shall do at 6 pm' };
     return note;
   }
   // set input fileds values with mock data
@@ -147,13 +147,13 @@ export class NoteViewPage {
     inputEditTitle = this.getEditTitleInputBox().getAttribute('value');
     inputEditText = this.getEditTextInputBox().getAttribute('value');
     inputEditStatus = this.getEditStatusInputBox().getAttribute('ng-reflect-model');
-    return Promise.all([inputEditTitle, inputEditText, inputEditStatus]).then( (values) => {
+    return Promise.all([inputEditTitle, inputEditText, inputEditStatus]).then((values) => {
       return values;
     });
   }
   // get note data
   getEditMockNote(): any {
-    const note: any = { title: 'Read Angular 1 blog', text : 'Shall do at 10.30 pm', state: 'not-started'};
+    const note: any = { title: 'Read Angular 1 blog', text: 'Shall do at 10.30 pm', state: 'not-started' };
     return note;
   }
   // set input fileds values with mock data

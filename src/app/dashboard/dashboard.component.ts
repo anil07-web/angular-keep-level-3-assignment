@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { NotesService } from '../services/notes.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -7,6 +8,9 @@ import { Component } from '@angular/core';
 })
 export class DashboardComponent {
 
-  constructor() {
+  constructor(private notesService: NotesService) {
+    this.notesService.getNotes().subscribe(
+      data => {}
+    );
   }
 }
