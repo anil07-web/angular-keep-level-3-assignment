@@ -1,31 +1,19 @@
-<!-- Label to display any error messages -->
 <label class="error-message">{{ errMessage }}</label>
-
-<!-- Expansion panel to add new notes -->
-<div style="text-align:center">
-    <div class="note-container">
-        <mat-expansion-panel class="note-expansion-panel">
-            <mat-expansion-panel-header>
-                <mat-panel-title>Take a note</mat-panel-title>
-            </mat-expansion-panel-header>
-            <div class="note-mat-form-field">
-                <mat-form-field>
-                    <input matInput name="title" placeholder="Enter Title" [(ngModel)]="note.title">
-                </mat-form-field>
-                <mat-form-field>
-                    <textarea matInput name="text" placeholder="Enter Description" [(ngModel)]="note.text"></textarea>
-                </mat-form-field>
+<div class="keep-c-expansion-panel-wrapper">
+    <mat-expansion-panel>
+        <mat-expansion-panel-header>
+            <mat-panel-title>Take a note</mat-panel-title>
+        </mat-expansion-panel-header>
+        <div class="keep-c-note-taker-wrapper">
+            <mat-form-field>
+                <input [(ngModel)]="note.title" name="title" matInput placeholder="Title" type="text">
+            </mat-form-field>
+            <mat-form-field>
+                <textarea [(ngModel)]="note.text" name="text" matInput placeholder="Text"></textarea>
+            </mat-form-field>
+            <div class="keep-c-done-wrapper">
+                <button mat-flat-button (click)="takeNotes()">Done</button>
             </div>
-            <button mat-button (click)="addNote()">Done</button>
-        </mat-expansion-panel>
-    </div>
-    <div>
-    </div>
-    <div>
-        <!--<app-note-view [notes]="notes"></app-note-view>-->
-       <!-- <app-note-view *ngIf="!isListView" [notes]="notes"></app-note-view>-->
-        <!--<app-list-view *ngIf="isListView" [notStartedNotes]="notStartedNotes" [startedNotes]="startedNotes" [completedNotes]="completedNotes"></app-list-view>-->
-    </div>
+        </div>
+    </mat-expansion-panel>
 </div>
-
-

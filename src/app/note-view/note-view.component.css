@@ -1,6 +1,6 @@
-.keep-c-note-container{
-    margin-top: 20vh;
+.keep-c-note-container {
+    padding: 30px;
     display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-}
+    flex-wrap: wrap;
+  }
+  

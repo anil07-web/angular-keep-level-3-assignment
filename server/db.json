@@ -8,63 +8,21 @@
     },
     {
       "id": 2,
-      "title": "Call Ravi2",
+      "title": "Call Ravi",
       "text": "Track the new submissions",
-      "state": "completed"
+      "state": "started"
     },
     {
-      "title": "Capitalism1",
+      "title": "Capitalism",
       "text": "Mark Twain",
       "id": 3,
       "state": "completed"
     },
     {
-      "title": "My first card",
-      "text": "Test",
+      "title": "Market",
+      "text": "Spoon",
       "state": "not-started",
       "id": 4
-    },
-    {
-      "title": "2nd card",
-      "text": "save",
-      "state": "started",
-      "id": 5
-    },
-    {
-      "title": "Test",
-      "text": "Test",
-      "state": "started",
-      "id": 6
-    },
-    {
-      "title": "Test",
-      "text": "hgi;'''",
-      "state": "not-started",
-      "id": 7
-    },
-    {
-      "title": "Read Angular 1 blog",
-      "text": "Shall do at 10.30 pm",
-      "state": "not-started",
-      "id": 8
-    },
-    {
-      "title": "Read Angular 1 blog",
-      "text": "Shall do at 10.30 pm",
-      "state": "not-started",
-      "id": 9
-    },
-    {
-      "title": "Read Angular 1 blog",
-      "text": "Shall do at 10.30 pm",
-      "state": "not-started",
-      "id": 10
-    },
-    {
-      "title": "Anil",
-      "text": "Niit",
-      "state": "not-started",
-      "id": 11
     }
   ]
 }

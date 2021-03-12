@@ -1,7 +1,7 @@
-import { Component, Inject } from '@angular/core';
+import { Component, OnInit, Inject, OnDestroy } from '@angular/core';
 import { Note } from '../note';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { EditNoteOpenerComponent } from '../edit-note-opener/edit-note-opener.component';
+import { RouterService } from '../services/router.service';
 import { NotesService } from '../services/notes.service';
 
 @Component({
@@ -9,23 +9,36 @@ import { NotesService } from '../services/notes.service';
   templateUrl: './edit-note-view.component.html',
   styleUrls: ['./edit-note-view.component.css']
 })
-export class EditNoteViewComponent {
+export class EditNoteViewComponent implements OnInit, OnDestroy
+{
   note: Note;
   states: Array<string> = ['not-started', 'started', 'completed'];
   errMessage: string;
 
-  constructor(
-    public dialogRef: MatDialogRef<EditNoteOpenerComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any,
-    private noteService: NotesService) {
-    this.errMessage = '';
-    this.note = data.note;
+  constructor(private matDialogRef: MatDialogRef<EditNoteViewComponent>,
+    private routeService: RouterService,
+    private notesService: NotesService,
+    @Inject(MAT_DIALOG_DATA) private data: any) { }
+
+  ngOnInit()
+  {
+    this.note = this.notesService.getNoteById(this.data.note);
   }
 
-  onSave() {
-    this.noteService.editNote(this.note).subscribe(
-      data => {
-        this.dialogRef.close(this.data);
-      }, err => { this.errMessage = 'Http failure response for http://localhost:3000/api/v1/notes: 404 Not Found'; });
+  ngOnDestroy()
+  {
+    this.routeService.routeBack();
+  }
+
+  onSave()
+  {
+    this.notesService.editNote(this.note).subscribe((editedNote) =>
+    {
+      this.matDialogRef.close();
+    },
+      (err: any) =>
+      {
+        this.errMessage = err.message;
+      });
   }
 }

@@ -1,5 +1,6 @@
-<mat-card class="mat-card"
-[routerLink]="['/dashboard', {outlets: {'noteEditOutlet': ['note', note.id,'edit']}}]">
+<mat-card class="keep-c-note" (click)="openEditView()">
     <mat-card-title>{{note.title}}</mat-card-title>
-    <mat-card-content>{{note.text}}</mat-card-content>
+    <mat-card-content>
+        <p>{{note.text}}</p>
+    </mat-card-content>
 </mat-card>

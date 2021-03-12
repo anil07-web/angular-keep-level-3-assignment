@@ -1,6 +1,4 @@
-.note-mat-card-list{
-    margin-top: 20vh;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-}
+.keep-c-note {
+    margin-left: 10px;
+    margin-top: 10px;
+  }

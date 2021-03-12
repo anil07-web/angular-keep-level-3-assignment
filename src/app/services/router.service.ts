@@ -3,31 +3,42 @@ import { Router } from '@angular/router';
 import { Location } from '@angular/common';
 
 @Injectable()
-export class RouterService {
+export class RouterService
+{
 
-  constructor(private router: Router, private location: Location) { }
+  constructor(public router: Router, private location: Location) { }
 
-  routeToDashboard() {
+  routeToDashboard()
+  {
     this.router.navigate(['dashboard']);
   }
 
-  routeToLogin() {
+  routeToLogin()
+  {
     this.router.navigate(['login']);
   }
 
-  routeToEditNoteView(noteId) {
-    this.router.navigate(['dashboard/note', noteId, 'edit']);
+  routeToEditNoteView(noteId)
+  {
+    this.router.navigate(['dashboard', {
+      outlets: {
+        noteEditOutlet: ['note', noteId, 'edit'],
+      }
+    }]);
   }
 
-  routeBack() {
+  routeBack()
+  {
     this.location.back();
   }
 
-  routeToNoteView() {
+  routeToNoteView()
+  {
     this.router.navigate(['dashboard/view/noteview']);
   }
 
-  routeToListView() {
+  routeToListView()
+  {
     this.router.navigate(['dashboard/view/listview']);
   }
 }

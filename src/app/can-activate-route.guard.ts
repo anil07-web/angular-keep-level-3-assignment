@@ -1,27 +1,29 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
-import { RouterService } from './services/router.service';
 import { AuthenticationService } from './services/authentication.service';
+import { RouterService } from './services/router.service';
+
 
 @Injectable()
-export class CanActivateRouteGuard implements CanActivate {
-  private bearertoken: string;
-  constructor(private routeService: RouterService, private authService: AuthenticationService) {
-    this.bearertoken = authService.getBearerToken();
-  }
+export class CanActivateRouteGuard implements CanActivate
+{
+
+  constructor(private authService: AuthenticationService, public routeService: RouterService) { }
+
   canActivate(
     next: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-      return new Promise<boolean>((resolve, reject) => {
-        this.authService.isUserAuthenticated(this.bearertoken).then(resp => {
-          if (!resp) {
-            reject(false);
-            this.routeService.routeToLogin();
-          } else {
-            resolve(true);
-          }
-        });
-      });
+    state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean
+  {
+    const booleanPromise = this.authService.isUserAuthenticated(this.authService.getBearerToken());
+
+    return booleanPromise.then((authenticated) =>
+    {
+      if (!authenticated)
+      {
+        this.routeService.routeToLogin();
+      }
+      return authenticated;
+    });
   }
 }

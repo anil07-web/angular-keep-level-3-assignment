@@ -1,40 +1,55 @@
 import { Component } from '@angular/core';
-import { FormControl } from '@angular/forms';
-import { LoginUser } from '../LoginUser';
-import { RouterService } from '../services/router.service';
 import { AuthenticationService } from '../services/authentication.service';
+import { RouterService } from '../services/router.service';
+import { FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent {
-  submitMessage: string;
-  loginUser: LoginUser;
-  username = new FormControl();
-  password = new FormControl();
-  constructor(private routerService: RouterService, private authService: AuthenticationService) {
-    this.submitMessage = '';
-    this.loginUser = new LoginUser;
-  }
-  loginSubmit() {
-    this.submitMessage = '';
-    this.loginUser.username = this.username.value;
-    this.loginUser.password = this.password.value;
+export class LoginComponent
+{
 
-    this.authService.authenticateUser(this.loginUser).subscribe(
-      resp => {
-        this.authService.setBearerToken(resp['token']);
-        this.routerService.routeToDashboard();
-      }, err => {
-        this.submitMessage = err.message;
-        if (err.status === 403) {
-          this.submitMessage = 'Unauthorized';
-        } else {
-          this.submitMessage = 'Http failure response for http://localhost:3000/auth/v1: 404 Not Found';
+  public bearerToken: any;
+  public submitMessage: string;
+  username = new FormControl('', [Validators.required]);
+  password = new FormControl('', [Validators.required]);
+
+  constructor(private authService: AuthenticationService, public routerService: RouterService) { }
+
+  loginSubmit()
+  {
+    if (this.username.valid && this.password.valid)
+    {
+      this.authService.authenticateUser({
+        username: this.username.value,
+        password: this.password.value
+      }).subscribe(
+        res =>
+        {
+          this.bearerToken = res['token'];
+          this.authService.setBearerToken(this.bearerToken);
+          this.routerService.routeToDashboard();
+        },
+        err =>
+        {
+          if (err.status === 403)
+          {
+            this.submitMessage = err.error.message;
+          } else
+          {
+            this.submitMessage = err.message;
+          }
         }
-      }
-    );
+      );
+    }
+  }
+
+  getErrorMessage()
+  {
+    return this.username.hasError('required') ? 'You must enter a value' :
+      this.password.hasError('required') ? 'You must enter a value ' :
+        '';
   }
 }
